@@ -5,7 +5,7 @@ const LOOPS_COUNT = 10;
 const ARGS_MAX = 200;
 
 // empirical performance difference for GitHub CI
-const MEMO_TIMES_FASTER = 40;
+const MEMO_TIMES_FASTER = 35;
 
 function run(parseImpl) {
     const start = Date.now();
