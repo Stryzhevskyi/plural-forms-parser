@@ -26,7 +26,7 @@ function checkInput(inFixExpression) {
  */
 function inToPostFix(expression) {
     const stack = [];
-    let queue = [];
+    const queue = [];
 
     checkInput(expression);
     const peek = () => stack[stack.length - 1];
@@ -77,7 +77,7 @@ function inToPostFix(expression) {
         }
     }
     if (stack.length) {
-        queue = queue.concat(stack.reverse());
+        return queue.concat(stack.reverse());
     }
 
     return queue;
