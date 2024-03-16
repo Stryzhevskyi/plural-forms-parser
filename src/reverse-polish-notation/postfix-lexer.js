@@ -4,11 +4,11 @@ module.exports = function tokenize(header) {
     const withPadding = header
         .replace(DIGITS_REGEXP, ' $1 ')
         .replaceAll('n', ' n ')
-        .replace(SPACES_REGEXP, ' ')
         .split(')')
         .join(' ) ')
         .split('(')
-        .join(' ( ');
+        .join(' ( ')
+        .replace(SPACES_REGEXP, ' ');
     return withPadding
         .split(' ')
         .filter(Boolean)

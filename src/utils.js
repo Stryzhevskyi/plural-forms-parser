@@ -6,29 +6,31 @@ const RP = ')';
 const TERNARY_OPEN_IF = 'ternary-open-if';
 const TERNARY_ELSE = 'ternary-else';
 const TERNARY_CLOSED_IF = '?:';
+const L_ASSOCIATIVITY = 'left';
+const R_ASSOCIATIVITY = 'right';
 
 /**
- * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence#table
+ * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_prec#table
  */
 const operators = {
-    '*': { precedence: 12, associativity: 'left' },
-    '/': { precedence: 12, associativity: 'left' },
-    '%': { precedence: 12, associativity: 'left' },
-    '+': { precedence: 11, associativity: 'left' },
-    '-': { precedence: 11, associativity: 'left' },
-    '>': { precedence: 9, associativity: 'left' },
-    '<': { precedence: 9, associativity: 'left' },
-    '>=': { precedence: 9, associativity: 'left' },
-    '<=': { precedence: 9, associativity: 'left' },
-    '==': { precedence: 8, associativity: 'left' },
-    '===': { precedence: 8, associativity: 'left' },
-    '!=': { precedence: 8, associativity: 'left' },
-    '!==': { precedence: 8, associativity: 'left' },
-    '&&': { precedence: 4, associativity: 'left' },
-    '||': { precedence: 3, associativity: 'left' },
-    '?': { precedence: 2, associativity: 'right' },
-    ':': { precedence: 1, associativity: 'right' },
-    [TERNARY_CLOSED_IF]: { precedence: 2, associativity: 'right' },
+    '*': { prec: 12, assoc: L_ASSOCIATIVITY },
+    '/': { prec: 12, assoc: L_ASSOCIATIVITY },
+    '%': { prec: 12, assoc: L_ASSOCIATIVITY },
+    '+': { prec: 11, assoc: L_ASSOCIATIVITY },
+    '-': { prec: 11, assoc: L_ASSOCIATIVITY },
+    '>': { prec: 9, assoc: L_ASSOCIATIVITY },
+    '<': { prec: 9, assoc: L_ASSOCIATIVITY },
+    '>=': { prec: 9, assoc: L_ASSOCIATIVITY },
+    '<=': { prec: 9, assoc: L_ASSOCIATIVITY },
+    '==': { prec: 8, assoc: L_ASSOCIATIVITY },
+    '===': { prec: 8, assoc: L_ASSOCIATIVITY },
+    '!=': { prec: 8, assoc: L_ASSOCIATIVITY },
+    '!==': { prec: 8, assoc: L_ASSOCIATIVITY },
+    '&&': { prec: 4, assoc: L_ASSOCIATIVITY },
+    '||': { prec: 3, assoc: L_ASSOCIATIVITY },
+    '?': { prec: 2, assoc: R_ASSOCIATIVITY },
+    ':': { prec: 1, assoc: R_ASSOCIATIVITY },
+    [TERNARY_CLOSED_IF]: { prec: 2, assoc: R_ASSOCIATIVITY },
 };
 
 const operations = {
@@ -98,7 +100,7 @@ function isOperator(token) {
 
 function getOperatorPriority(operator) {
     if (isOperator(operator)) {
-        return operators[operator].precedence;
+        return operators[operator].prec;
     }
 
     throw new Error(`Unknown operator ${operator}`);
@@ -106,17 +108,11 @@ function getOperatorPriority(operator) {
 
 function isOperatorLeftToRight(operator) {
     if (isOperator(operator)) {
-        return operators[operator].associativity === 'left';
+        return operators[operator].assoc === L_ASSOCIATIVITY;
     }
 
     throw new Error(`Unknown operator ${operator}`);
 }
-
-const assert = (predicate) => {
-    if (!predicate) {
-        throw new Error('Assertion failed due to invalid token');
-    }
-};
 
 module.exports = {
     operators,
@@ -126,7 +122,6 @@ module.exports = {
     isOperator,
     getOperatorPriority,
     isOperatorLeftToRight,
-    assert,
     LP,
     RP,
     TERNARY_OPEN_IF,
