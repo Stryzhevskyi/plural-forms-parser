@@ -4,9 +4,11 @@ This library can parse [Plural Forms](https://www.gnu.org/software/gettext/manua
 
 It is using Shunting yard algorithm instead of `eval()` or `new Function()`.
 
+NPM: [plural-forms-parser](https://www.npmjs.com/package/plural-forms-parser)
+
 ### Example
 ```js
-const { parse } = require('plural-froms-parser');
+const { parse } = require('plural-forms-parser');
 const expression = 'n > 1 ? 2 : 3';
 const rpnExpression = parse(expression);
 //  {
